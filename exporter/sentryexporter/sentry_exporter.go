@@ -394,6 +394,8 @@ func statusFromSpanStatus(spanStatus ptrace.Status, tags map[string]string) (sta
 	switch {
 	case code == 1 || code == 0:
 		sentryStatus = sentry.SpanStatusOK
+	case code == 2:
+		sentryStatus = sentry.SpanStatusInternalError
 	case foundHTTPCode:
 		httpStatus, foundHTTPStatus := canonicalCodesHTTPMap[httpCode]
 		switch {
